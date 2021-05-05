@@ -1,8 +1,8 @@
-
 Element.prototype.appendAfter = function (element) {
 element.parentNode.insertBefore(this, element.nextSibling)
 }
 
+function noop () {}
 
 function _createFooter (buttons = []) {
     if (buttons.length === 0) {
@@ -10,8 +10,20 @@ function _createFooter (buttons = []) {
     }
     const wrap = document.createElement('wrap');
     wrap.classList.add('modal-footer');
+    buttons.forEach(btn => {
+        const $btn = document.createElement('button');
+        $btn.textContent = btn.text;
+        $btn.classList.add('btn');
+        $btn.classList.add(`btn-${btn.type}` || 'secondary');
+        $btn.onclick = btn.handler || noop;
+        wrap.appendChild($btn);
+    })
     return wrap;
 }
+
+
+
+
 
 
 
