@@ -36,16 +36,18 @@ const myOptionObj = {
             type: 'primary',
             handler () {
                 console.log('Prim btn clicked');
+                modal.close();
             }
         },
         {
-            text: 'cansel',
-            type: 'primary',
-            handler () {
-                console.log('Prim btn clicked');
+            text: 'cancel',
+            type: 'danger',
+            handler (ev) {
+                console.log(`Danger-btn clicked`);
+                modal.close();
             }
         }
     ]
 }
-
+//const cards = $.cards(fruits);
 const modal = $.modal(myOptionObj);
