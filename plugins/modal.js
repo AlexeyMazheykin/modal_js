@@ -2,7 +2,7 @@
 Element.prototype.appendAfter = function (element) {
 element.parentNode.insertBefore(this, element.nextSibling)
 }
-
+function noop () {};
 
 function _createFooter (buttons = []) {
     if (buttons.length === 0) {
@@ -10,6 +10,14 @@ function _createFooter (buttons = []) {
     }
     const wrap = document.createElement('wrap');
     wrap.classList.add('modal-footer');
+    buttons.forEach(btn => {
+        const $btn = document.createElement('button');
+        $btn.textContent = btn.text;
+        $btn.classList.add('btn');
+        $btn.classList.add(`btn-${btn.type}` || 'secondary');
+        $btn.onclick = btn.handler || noop;
+        wrap.appendChild($btn);
+    })
     return wrap;
 }
 
@@ -48,7 +56,7 @@ $.modal = function (options) {
     let destroyed = false;
     const $modal = _createModal(options);
     const modal =  {
-        open() {
+        open(event) {
             if (destroyed) {
                 return console.log('Modal is destroyed')
             }
@@ -57,11 +65,11 @@ $.modal = function (options) {
         close() {
             closing = true;
             $modal.classList.remove('open');
-/*            $modal.classList.add('hide');
+           // $modal.classList.add('hide');
             setTimeout(() => {
-                $modal.classList.remove('hide');
+             //   $modal.classList.remove('hide');
                 closing = false;
-            }, ANIMATION_SPEED)*/
+            }, ANIMATION_SPEED)
         }
     }
 
@@ -69,9 +77,17 @@ $.modal = function (options) {
         if (event.target.dataset.close) {
             modal.close();
         }
+        if (event.target.dataset.open) {
+            event.preventDefault();
+            modal.setContent(`
+            <p>${event.target.dataset.title}</p>
+            <p>${event.target.dataset.price}</p>
+            `)
+            modal.open(event);
+        }
     }
 
-    $modal.addEventListener('click', listener)
+    document.addEventListener('click', listener)
 
 
     return Object.assign(modal, {
