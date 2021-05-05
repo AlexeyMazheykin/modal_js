@@ -8,9 +8,20 @@ const fruits = [
     {
         id: 3, title: 'Манго', price: 125, img: 'https://e0.edimdoma.ru/data/posts/0001/8507/18507-ed4_wide.jpg?1495009317', text: 'Манго это сладкий и сочный тропический фрукт'
     },
-
 ]
-
+function render () {
+    document.querySelector()
+}
+/*wrap.insertAdjacentHTML('beforeend', `
+        <div class="card">
+            <img class="card-img-top" src="${item.img}">
+            <div class="card-body">
+                <h5 class="card-title">${item.title}</h5>
+                <p class="card-text">${item.text}</p>
+                <a href="#" class="btn btn-primary" data-open="true" data-price="${item.price}" data-title="${item.title}">Перейти</a>
+            </div>
+        </div>
+        `)*/
 const myOptionObj = {
     title: 'Dunhills Title',
     content: `
