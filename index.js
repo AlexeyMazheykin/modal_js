@@ -1,16 +1,15 @@
-<div className="modal-overlay" data-close="true">
-    <div className="modal-window" style="width: ${option.width || DEFAULT_WIDTH}">
-        <div className="modal-header">
-                <span className="modal-title">
-                    ${option.title || 'Default title'}
-                </span>
-            ${option.closable ? '<span class="modal-close" data-close="true">&times;</span>' : ''}
-        </div>
-        <div className="modal-body" data-content>
-            ${option.content || 'no content'}
-        </div>
-    </div>
-</div>
+const fruits = [
+    {
+        id: 1, title: 'Яблоки', price: 20, img: 'https://e1.edimdoma.ru/data/ingredients/0000/2374/2374-ed4_wide.jpg?1487746348', text: 'Яблоки вкусные и полезные'
+    },
+    {
+        id: 2, title: 'Апельсины', price: 25, img: 'https://e0.edimdoma.ru/data/ingredients/0000/8813/8813-ed4_wide.jpg?1482763602', text: 'Апельсины сочные и содержат много витамина С'
+    },
+    {
+        id: 3, title: 'Манго', price: 125, img: 'https://e0.edimdoma.ru/data/posts/0001/8507/18507-ed4_wide.jpg?1495009317', text: 'Манго это сладкий и сочный тропический фрукт'
+    },
+
+]
 
 const myOptionObj = {
     title: 'Dunhills Title',
