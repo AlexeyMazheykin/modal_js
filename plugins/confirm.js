@@ -1,0 +1,3 @@
+$.confirm = function (option) {
+
+}

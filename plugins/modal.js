@@ -1,10 +1,11 @@
 Element.prototype.appendAfter = function (element) {
-element.parentNode.insertBefore(this, element.nextSibling)
+    element.parentNode.insertBefore(this, element.nextSibling)
 }
 
-function noop () {}
+function noop() {
+}
 
-function _createFooter (buttons = []) {
+function _createFooter(buttons = []) {
     if (buttons.length === 0) {
         return document.createElement('div');
     }
@@ -20,11 +21,6 @@ function _createFooter (buttons = []) {
     })
     return wrap;
 }
-
-
-
-
-
 
 
 function _createModal(option) {
@@ -49,7 +45,7 @@ function _createModal(option) {
     const footer = _createFooter(option.footerItems);
     modal.querySelector('.modal-window').appendChild(footer)
 
- //  footer.appendAfter(modal.querySelector('[data-content]'))
+    //  footer.appendAfter(modal.querySelector('[data-content]'))
     document.body.appendChild(modal);
     return modal;
 }
@@ -59,7 +55,7 @@ $.modal = function (options) {
     let closing = false;
     let destroyed = false;
     const $modal = _createModal(options);
-    const modal =  {
+    const modal = {
         open() {
             if (destroyed) {
                 return console.log('Modal is destroyed')
@@ -69,11 +65,11 @@ $.modal = function (options) {
         close() {
             closing = true;
             $modal.classList.remove('open');
-/*            $modal.classList.add('hide');
+          //  $modal.classList.add('hide');
             setTimeout(() => {
                 $modal.classList.remove('hide');
                 closing = false;
-            }, ANIMATION_SPEED)*/
+            }, ANIMATION_SPEED)
         }
     }
 
@@ -87,12 +83,12 @@ $.modal = function (options) {
 
 
     return Object.assign(modal, {
-        destroy () {
+        destroy() {
             destroyed = true;
             $modal.remove();
             $modal.removeEventListener('click', listener)
         },
-        setContent (html) {
+        setContent(html) {
             document.querySelector('[data-content]').innerHTML = html;
         }
     })

@@ -28,7 +28,7 @@ const toHTML = fruit => `
             <div class="card-body">
                 <h5 class="card-title">${fruit.title}</h5>
                 <p class="card-text">${fruit.text}</p>
-                <a href="#" class="btn btn-primary" data-btn="price" data-title="${fruit.title}">Посмотреть цену</a>
+                <a href="#" class="btn btn-primary" data-btn="price" data-title="${fruit.title}" data-id="${fruit.id}">Посмотреть цену</a>
                 <a href="#" class="btn btn-danger" data-open="true" data-title="${fruit.title}">Удалить</a>
             </div>
         </div>
@@ -40,33 +40,35 @@ function render() {
     const html = fruits.map(toHTML).join('');
     document.querySelector('#content').innerHTML = html;
 }
+render();
 
-const myOptionObj = {
-    title: 'Dunhills Title',
-    content: `
-    <p>Lorem ipsum dolor sit amet.</p>
-    <p>Lorem ipsum dolor sit amet.</p>
-    `,
+const priceObj = {
+    title: 'Цена на товар',
     closable: true,
     width: '500px',
     footerItems: [
         {
-            text: 'ok',
+            text: 'Закрыть',
             type: 'primary',
             handler() {
                 console.log('Prim btn clicked');
-                modal.close();
+                priceModal.close();
             }
         },
-        {
-            text: 'cancel',
-            type: 'danger',
-            handler(ev) {
-                console.log(`Danger-btn clicked`);
-                modal.close();
-            }
-        }
     ]
 }
-//const cards = $.cards(fruits);
-const modal = $.modal(myOptionObj);
+
+const priceModal = $.modal(priceObj);
+document.addEventListener('click', (e) => {
+    e.preventDefault();
+    const btnType = e.target.dataset.btn;
+    const id = +e.target.dataset.id;
+    if (btnType === 'price') {
+        const fruit = fruits.find(f=>f.id === id);
+        priceModal.setContent(`
+        <p>Цена на ${fruit.title}: <strong>${fruit.price}</strong></p>
+        `)
+        priceModal.open()
+
+    }
+})
